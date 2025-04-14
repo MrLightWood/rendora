@@ -10,6 +10,7 @@ LABEL name="chrome-headless" \
 			description="Headless Chrome"
 
 RUN apt-get update && apt-get install -y \
+        curl \
 	apt-transport-https \
 	ca-certificates \
  	fontconfig \
