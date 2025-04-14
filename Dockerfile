@@ -5,7 +5,7 @@ RUN make build
 
 
 FROM alpine:latest  
-RUN apk --no-cache add ca-certificates
+RUN apk --no-cache add ca-certificates curl
 WORKDIR /rendora
 COPY --from=0 /app/cmd/rendora/rendora /usr/bin
 ENTRYPOINT ["rendora"]
