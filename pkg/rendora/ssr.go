@@ -30,7 +30,7 @@ type reqBody struct {
 	URL string `json:"url"`
 }
 
-//HeadlessResponse contains the status code, DOM content and headers of the response coming from the headless chrome instance
+// HeadlessResponse contains the status code, DOM content and headers of the response coming from the headless chrome instance
 type HeadlessResponse struct {
 	Status  int               `json:"status"`
 	Content string            `json:"content"`
@@ -120,12 +120,16 @@ func (R *Rendora) getResponse(uri string) (*HeadlessResponse, error) {
 }
 
 func (R *Rendora) getSSR(c *gin.Context) {
+	log.Println("Starting SSR for: " + c.Request.RequestURI)
 
 	resp, err := R.getResponse(c.Request.RequestURI)
 	if err != nil {
+		log.Println("SSR error:", err)
 		c.AbortWithStatus(http.StatusServiceUnavailable)
 		return
 	}
+
+	log.Println("SSR finished")
 
 	contentHdr, ok := resp.Headers["Content-Type"]
 	if ok == false {
